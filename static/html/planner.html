@@ -41,9 +41,8 @@
       mapTypeControl: false
     };
 
-    var map1 = new google.maps.Map(document.getElementById("map_canvas1"),myOptions);
-    var map2 = new google.maps.Map(document.getElementById("map_canvas2"),myOptions);
-    var map3 = new google.maps.Map(document.getElementById("map_canvas3"),myOptions);
+		    directionsDisplay1.setMap(map1);
+		    directionsDisplay1.setPanel(document.getElementById("directionsPanel1"));
 
     directionsDisplay1.setMap(map1);
     directionsDisplay1.setPanel(document.getElementById("directionsPanel1"));
@@ -259,6 +258,6 @@
 		  	<div class="well">
 		  		<h5>&copy; Traveloop 2014</h5>
 		  		<a class="link" href="#">Follow us on Twitter</a>
-			</div>
+			</div>	
 	</body>
 </html>

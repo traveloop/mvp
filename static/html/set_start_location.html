@@ -16,7 +16,7 @@
 		<!-- Navbar -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation">
 	  		<div class="container">
-	  			<a href="index.html" title="home"><img src="images/traveloop-logo-blue.png" class="nav-image"/></a>
+	  			<a href="#" title="home"><img src="images/traveloop-logo-blue.png" class="nav-image"/></a>
 	  		</div>
 		</nav>
 		<!-- Jumbotron -->
@@ -24,17 +24,16 @@
 		  	<div class="title">
 		  		<h3>Set the starting location for your trip...</h3>	
 		  	</div>	
-		  	<form>
-				<div class="btn-group">
-	            <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Action <span class="caret"></span></button>
-		            <ul class="dropdown-menu">
-		                <li class="disabled"><a href="#">Current Location</a></li>
-		                <li><a href="planner.html">New Street Station, Birmingham</a></li>
-		                <li class="disabled"><a href="#">Moor Street Station, Birmingham</a></li>
-		                <li class="divider"></li>
-		                <li><a href="#">Separated link</a></li>
-		            </ul>
-		        </div>
+		  	<div class="center-div">
+			  	<form class="form-inline" role="form">
+					<div class="form-group">
+					    <label class="sr-only" for="exampleInputEmail2">Start Here</label>
+					    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="My start point">
+					    <a href="planner.html" class="btn btn-default my-button" role="button">Let's go</a>
+
+					</div>
+				</form>
+			</div>
 	  		<div class="well">
 		  		<h5>&copy; Traveloop 2014</h5>
 		  		<a class="link" href="results.html">Follow us on Twitter</a>
