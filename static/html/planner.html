@@ -136,12 +136,7 @@
             dest3 = dest1_;
           }
         }
-
-//        alert("Dest1: " + dest1 + "\nDest2: " + dest2 + "\nDest3: " + dest3);
-
     }
-    });
-
     // Now we have the journeys in order, we can construct routes and maps.
 
     var request1 = {
@@ -213,6 +208,9 @@
         alert('The DirectionsRequest provided was invalid.');
       }
     directionsDisplay3.setDirections(response3);
+    });
+
+
     });
 
   }
