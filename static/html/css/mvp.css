@@ -14,6 +14,20 @@ h5 {
 	display: inline;
 }
 
+.center-div{
+    margin: auto;
+    width:100%;
+    text-align: center;
+}
+
+.center-div .btn {
+	margin-top: 0px;
+}
+
+.jumbotron .btn.my-button {
+	margin-top: 0px;
+}
+
 /* Jumbotron Styling */
 .jumbotron {
 	background: url(https://unsplash.imgix.net/45/eDLHCtzRR0yfFtU0BQar_sylwiabartyzel_themap.jpg?q=75&fm=jpg&auto=format&s=98e65d0d3f8fcc55b075259021149508) no-repeat center center fixed; 
@@ -103,6 +117,7 @@ nav .btn-lg, .btn-group-lg>.btn>.nav-button {
 	margin-top: 40px;
 }
 
+/* Media Query tweaks */
 @media(min-width:500px){
 
 	.jumbotron img {
@@ -112,3 +127,6 @@ nav .btn-lg, .btn-group-lg>.btn>.nav-button {
 		max-width: 675px;
 	}
 }
+
+
+
