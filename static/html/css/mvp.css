@@ -4,6 +4,16 @@
     font-family: 'Titillium Web', sans-serif;;
 }
 
+/* h5 customise */
+h5 {
+	margin-top: 0px;
+	color: white;
+	font-size: 16px;
+	color: #428bca;
+	float: left;
+	display: inline;
+}
+
 /* Jumbotron Styling */
 .jumbotron {
 	background: url(https://unsplash.imgix.net/45/eDLHCtzRR0yfFtU0BQar_sylwiabartyzel_themap.jpg?q=75&fm=jpg&auto=format&s=98e65d0d3f8fcc55b075259021149508) no-repeat center center fixed; 
@@ -22,7 +32,7 @@
 	border-radius: 0px;
 	border: none;
 	margin-top: 100px;
-	margin-bottom: 75px;
+	margin-bottom: 250px;
 }
 
 /* well bottom link float*/
@@ -37,17 +47,9 @@
 	text-align: center;
 	color: white;
 }
-/* Jumbo titles h3*/
+/* Jumbo titles h3 */
 .title h3 {
 	font-size: 30px;
-}
-
-h5 {
-	margin-top: 0px;
-	color: white;
-	font-size: 16px;
-	float: left;
-	display: inline;
 }
 
 /* Navbar styling */
@@ -58,15 +60,17 @@ h5 {
 
 /* Logo in Nav */
 .image, .nav-image {
-	width: 100px;
+	width: 150px;
 	text-align: center;
 	display: inline;
 	float:left;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 /* Button in Nav */
 nav .btn-lg, .btn-group-lg>.btn>.nav-button {
-	margin-top: 15px;
+	margin-top: 18px;
 	display: inline;
 	float:right;
 }
@@ -96,7 +100,7 @@ nav .btn-lg, .btn-group-lg>.btn>.nav-button {
 
 /* Jumbo button tweak */
 .jumbotron .btn {
-	margin-top: 20px;
+	margin-top: 40px;
 }
 
 @media(min-width:500px){
@@ -105,6 +109,6 @@ nav .btn-lg, .btn-group-lg>.btn>.nav-button {
 		margin-left: auto;
 		margin-right: auto;
 		margin-top: 0px;
-		max-width: 500px;
+		max-width: 675px;
 	}
 }
