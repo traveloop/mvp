@@ -12,129 +12,210 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-		  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-		    <script type="text/javascript">
-		  var directionDisplay1;
-		  var directionsService1 = new google.maps.DirectionsService();
-		  var directionDisplay2;
-		  var directionsService2 = new google.maps.DirectionsService();
-		  var directionDisplay3;
-		  var directionsService3 = new google.maps.DirectionsService();
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-		  function initialize() {
-		    var newSt = new google.maps.LatLng(52.4777, -1.9);
-		    directionsDisplay1 = new google.maps.DirectionsRenderer();
-		    directionsDisplay2 = new google.maps.DirectionsRenderer();
-		    directionsDisplay3 = new google.maps.DirectionsRenderer();
+  <!-- The reason for having three of each object and not using arrays, is -->
+  <!-- to avoid hitting Google API usage limits. Probably investigating -->
+  <!-- other mapping APIs like Bing and OTP would be better. -->
+  <!-- Also, Google Maps API v3 does not allow for the use of waypoints in -->
+  <!-- transit mode journeys, so we cannot just make one big query and use -->
+  <!-- one map. This means lots of extra jumping through hoops :-( -->
+  <script type="text/javascript">
+  var directionDisplay1;
+  var directionsService1 = new google.maps.DirectionsService();
+  var directionDisplay2;
+  var directionsService2 = new google.maps.DirectionsService();
+  var directionDisplay3;
+  var directionsService3 = new google.maps.DirectionsService();
 
-		    var myOptions = {
-		      zoom: 14,
-		      center: newSt,
-		      mapTypeId: google.maps.MapTypeId.TRANSIT,
-		      mapTypeControl: false
-		    };
+  function initialize() {
+    var newSt = new google.maps.LatLng(52.4777, -1.9);
+    directionsDisplay1 = new google.maps.DirectionsRenderer();
+    directionsDisplay2 = new google.maps.DirectionsRenderer();
+    directionsDisplay3 = new google.maps.DirectionsRenderer();
 
-		    var map1 = new google.maps.Map(document.getElementById("map_canvas1"),myOptions);
-		    var map2 = new google.maps.Map(document.getElementById("map_canvas2"),myOptions);
-		    var map3 = new google.maps.Map(document.getElementById("map_canvas3"),myOptions);
+    var myOptions = {
+      zoom: 14,
+      center: newSt,
+      mapTypeId: google.maps.MapTypeId.TRANSIT,
+      mapTypeControl: false
+    };
 
 		    directionsDisplay1.setMap(map1);
 		    directionsDisplay1.setPanel(document.getElementById("directionsPanel1"));
 
-		    directionsDisplay2.setMap(map2);
-		    directionsDisplay2.setPanel(document.getElementById("directionsPanel2"));
+    directionsDisplay1.setMap(map1);
+    directionsDisplay1.setPanel(document.getElementById("directionsPanel1"));
 
-		    directionsDisplay3.setMap(map3);
-		    directionsDisplay3.setPanel(document.getElementById("directionsPanel3"));
+    directionsDisplay2.setMap(map2);
+    directionsDisplay2.setPanel(document.getElementById("directionsPanel2"));
 
-		    var marker = new google.maps.Marker({
-		      position: newSt,
-		      map: map1,
-		      title:"New St Rail Station"
-		    });
-		  }
+    directionsDisplay3.setMap(map3);
+    directionsDisplay3.setPanel(document.getElementById("directionsPanel3"));
 
-		  function calcRoute() {
+    var marker = new google.maps.Marker({
+      position: newSt,
+      map: map1,
+      title:"New St Rail Station"
+    });
+  }
 
-		    var NewStRailStation = new google.maps.LatLng(52.4777, -1.9);
+  function calcRoute() {
 
-		    var dest1 = document.getElementById("wayPoint1").value;
-		    var dest2 = document.getElementById("wayPoint2").value;
-		    var dest3 = document.getElementById("wayPoint3").value;
+    var NewStRailStation = new google.maps.LatLng(52.4777, -1.9);
 
-		    var request1 = {
-		      origin:NewStRailStation,
-		      destination:dest1,
-		      travelMode: google.maps.DirectionsTravelMode.TRANSIT
-		    };
-		    var request2 = {
-		      origin:dest1,
-		      destination:dest2,
-		      travelMode: google.maps.DirectionsTravelMode.TRANSIT
-		    };
-		    var request3 = {
-		      origin:dest2,
-		      destination:dest3,
-		      travelMode: google.maps.DirectionsTravelMode.TRANSIT
-		    };
-		    var request4 = {
-		      origin:dest3,
-		      destination:NewStRailStation,
-		      travelMode: google.maps.DirectionsTravelMode.TRANSIT
-		    };
+    var dest1_ = document.getElementById("wayPoint1").value;
+    var dest2_ = document.getElementById("wayPoint2").value;
+    var dest3_ = document.getElementById("wayPoint3").value;
 
-		    directionsService1.route(request1, function(response1, status) {
-		      if (status == 'ZERO_RESULTS') {
-		        alert('No route could be found between the origin and destination.');
-		      } else if (status == 'UNKNOWN_ERROR') {
-		        alert('A directions request could not be processed due to a server error. The request may succeed if you try again.');
-		      } else if (status == 'REQUEST_DENIED') {
-		        alert('This webpage is not allowed to use the directions service.');
-		      } else if (status == 'OVER_QUERY_LIMIT') {
-		        alert('The webpage has gone over the requests limit in too short a period of time.');
-		      } else if (status == 'NOT_FOUND') {
-		        alert('At least one of the origin, destination, or waypoints could not be geocoded.');
-		      } else if (status == 'INVALID_REQUEST') {
-		        alert('The DirectionsRequest provided was invalid.');
-		      }
-		    directionsDisplay1.setDirections(response1);
-		    });
+    // These dest variables will be used to construct route maps.
+    // We may be able to reorder them to make the journey shorter.
+    var dest1 = dest1_;
+    var dest2 = dest2_;
+    var dest3 = dest3_;
 
-		    directionsService2.route(request2, function(response2, status) {
-		      if (status == 'ZERO_RESULTS') {
-		        alert('No route could be found between the origin and destination.');
-		      } else if (status == 'UNKNOWN_ERROR') {
-		        alert('A directions request could not be processed due to a server error. The request may succeed if you try again.');
-		      } else if (status == 'REQUEST_DENIED') {
-		        alert('This webpage is not allowed to use the directions service.');
-		      } else if (status == 'OVER_QUERY_LIMIT') {
-		        alert('The webpage has gone over the requests limit in too short a period of time.');
-		      } else if (status == 'NOT_FOUND') {
-		        alert('At least one of the origin, destination, or waypoints could not be geocoded.');
-		      } else if (status == 'INVALID_REQUEST') {
-		        alert('The DirectionsRequest provided was invalid.');
-		      }
-		    directionsDisplay2.setDirections(response2);
-		    });
-		    directionsService3.route(request3, function(response3, status) {
-		      if (status == 'ZERO_RESULTS') {
-		        alert('No route could be found between the origin and destination.');
-		      } else if (status == 'UNKNOWN_ERROR') {
-		        alert('A directions request could not be processed due to a server error. The request may succeed if you try again.');
-		      } else if (status == 'REQUEST_DENIED') {
-		        alert('This webpage is not allowed to use the directions service.');
-		      } else if (status == 'OVER_QUERY_LIMIT') {
-		        alert('The webpage has gone over the requests limit in too short a period of time.');
-		      } else if (status == 'NOT_FOUND') {
-		        alert('At least one of the origin, destination, or waypoints could not be geocoded.');
-		      } else if (status == 'INVALID_REQUEST') {
-		        alert('The DirectionsRequest provided was invalid.');
-		      }
-		    directionsDisplay3.setDirections(response3);
-		    });
+    var distanceService = new google.maps.DistanceMatrixService();
 
-		  }
-		  </script>
+    var distRequest = {
+      origins: [NewStRailStation, NewStRailStation, NewStRailStation,
+                dest1_, dest1_, dest2_, dest2_, dest3_, dest3_],
+      destinations: [dest1_, dest2_, dest3_,
+                     dest2_, dest3_,
+                     dest1_, dest3_,
+                     dest1_, dest2_],
+      travelMode: google.maps.TravelMode.WALKING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      avoidHighways: false,
+      avoidTolls: false
+    };
+
+    distanceService.getDistanceMatrix(distRequest, function(response, status) {
+      if (status == google.maps.DistanceMatrixStatus.OK) {
+        var origins = response.originAddresses;
+        var destinations = response.destinationAddresses;
+
+        // Origins 1, 2 and 3 are the start point (New St)
+        // This is a crime against programming :(
+        var j1_time = response.rows[0].elements[0].duration.value
+        var j2_time = response.rows[1].elements[0].duration.value
+        var j3_time = response.rows[2].elements[0].duration.value
+        // Journeys between waypoint 1 and waypoint 2 and 3
+        var j4_time = response.rows[3].elements[0].duration.value
+        var j5_time = response.rows[4].elements[0].duration.value
+        // Journeys between waypoint 2 and waypoint 1 and 3
+        var j6_time = response.rows[5].elements[0].duration.value
+        var j7_time = response.rows[6].elements[0].duration.value
+        // Journeys between waypoint 3 and waypoint 1 and 2
+        var j8_time = response.rows[7].elements[0].duration.value
+        var j9_time = response.rows[8].elements[0].duration.value
+
+        if (j1_time <= j2_time && j1_time <= j3_time) {
+          dest1 = dest1_;
+          if (j4_time <= j5_time) {
+            dest2 = dest2_;
+            dest3 = dest3_;
+          } else {
+            dest2 = dest3_;
+            dest3 = dest2_;
+          }
+        } else if (j2_time <= j1_time && j2_time <= j3_time) {
+          dest1 = dest2_;
+          if (j6_time <= j7_time) {
+            dest2 = dest1_;
+            dest3 = dest3_;
+          } else {
+            dest2 = dest3_;
+            dest3 = dest1_;
+          }
+        } if (j3_time <= j2_time && j3_time <= j1_time) {
+          dest1 = dest3_;
+          if (j8_time <= j9_time) {
+            dest2 = dest1_;
+            dest3 = dest2_;
+          } else {
+            dest2 = dest2_;
+            dest3 = dest1_;
+          }
+        }
+    }
+    // Now we have the journeys in order, we can construct routes and maps.
+
+    var request1 = {
+      origin:NewStRailStation,
+      destination:dest1,
+      travelMode: google.maps.DirectionsTravelMode.TRANSIT
+    };
+    var request2 = {
+      origin:dest1,
+      destination:dest2,
+      travelMode: google.maps.DirectionsTravelMode.TRANSIT
+    };
+    var request3 = {
+      origin:dest2,
+      destination:dest3,
+      travelMode: google.maps.DirectionsTravelMode.TRANSIT
+    };
+    var request4 = {
+      origin:dest3,
+      destination:NewStRailStation,
+      travelMode: google.maps.DirectionsTravelMode.TRANSIT
+    };
+
+    directionsService1.route(request1, function(response1, status) {
+      if (status == 'ZERO_RESULTS') {
+        alert('No route could be found between the origin and destination.');
+      } else if (status == 'UNKNOWN_ERROR') {
+        alert('A directions request could not be processed due to a server error. The request may succeed if you try again.');
+      } else if (status == 'REQUEST_DENIED') {
+        alert('This webpage is not allowed to use the directions service.');
+      } else if (status == 'OVER_QUERY_LIMIT') {
+        alert('The webpage has gone over the requests limit in too short a period of time.');
+      } else if (status == 'NOT_FOUND') {
+        alert('At least one of the origin, destination, or waypoints could not be geocoded.');
+      } else if (status == 'INVALID_REQUEST') {
+        alert('The DirectionsRequest provided was invalid.');
+      }
+    directionsDisplay1.setDirections(response1);
+    });
+
+    directionsService2.route(request2, function(response2, status) {
+      if (status == 'ZERO_RESULTS') {
+        alert('No route could be found between the origin and destination.');
+      } else if (status == 'UNKNOWN_ERROR') {
+        alert('A directions request could not be processed due to a server error. The request may succeed if you try again.');
+      } else if (status == 'REQUEST_DENIED') {
+        alert('This webpage is not allowed to use the directions service.');
+      } else if (status == 'OVER_QUERY_LIMIT') {
+        alert('The webpage has gone over the requests limit in too short a period of time.');
+      } else if (status == 'NOT_FOUND') {
+        alert('At least one of the origin, destination, or waypoints could not be geocoded.');
+      } else if (status == 'INVALID_REQUEST') {
+        alert('The DirectionsRequest provided was invalid.');
+      }
+    directionsDisplay2.setDirections(response2);
+    });
+    directionsService3.route(request3, function(response3, status) {
+      if (status == 'ZERO_RESULTS') {
+        alert('No route could be found between the origin and destination.');
+      } else if (status == 'UNKNOWN_ERROR') {
+        alert('A directions request could not be processed due to a server error. The request may succeed if you try again.');
+      } else if (status == 'REQUEST_DENIED') {
+        alert('This webpage is not allowed to use the directions service.');
+      } else if (status == 'OVER_QUERY_LIMIT') {
+        alert('The webpage has gone over the requests limit in too short a period of time.');
+      } else if (status == 'NOT_FOUND') {
+        alert('At least one of the origin, destination, or waypoints could not be geocoded.');
+      } else if (status == 'INVALID_REQUEST') {
+        alert('The DirectionsRequest provided was invalid.');
+      }
+    directionsDisplay3.setDirections(response3);
+    });
+
+
+    });
+
+  }
+  </script>
 
 
 	</head>
@@ -142,11 +223,11 @@
 		<!-- Navbar -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation">
 	  		<div class="container">
-	  			<a href="#" title="home"><img src="images/traveloop-logo-blue.png" class="nav-image"/></a>
+	  			<a href="index.html" title="home"><img src="images/traveloop_large.png" class="nav-image"/></a>
 	  		</div>
 		</nav>
-		
-	<!-- Insert contect here -->
+
+		<!-- Insert contect here -->
 
   <form action="#" onsubmit="calcRoute();return false;" id="routeForm">
     <input type="text" id="wayPoint1" value=""><br/>
