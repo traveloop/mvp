@@ -1,3 +1,6 @@
+# private variables, e.g. API keys
+config.py
+
 # Virtualenv
 venv
 
