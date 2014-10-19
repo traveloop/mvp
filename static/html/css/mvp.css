@@ -1,42 +1,58 @@
 
 /* Fonts */
- h1, h2, h3, h4, h5, h6 {
-    font-family: 'Titillium Web', sans-serif;;
-}
-p, div {
+ h1, h2, h3, h4, h5, h6, p, div  {
     font-family: 'Titillium Web', sans-serif;;
 }
 
-.navbar {
-	padding-bottom: 0px;
-	margin-bottom: 0px;
-}
-
-/* Jumbotron styling */
+/* Jumbotron Styling */
 .jumbotron {
-	/* Jumbotron styling */
-
 	background: url(https://unsplash.imgix.net/45/eDLHCtzRR0yfFtU0BQar_sylwiabartyzel_themap.jpg?q=75&fm=jpg&auto=format&s=98e65d0d3f8fcc55b075259021149508) no-repeat center center fixed; 
   	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
   	background-color: darkgrey;
-
-	margin-bottom: 0px;
+  	margin-bottom: 0px;
+  	padding-top: 0px;
 }
 
-/* Centering text in jumbo */
-.jumbotron h2, .jumbotron p {
-	width: 100%;
+.well {
+	background-color: transparent;
+	box-shadow: none;
+	border-radius: 0px;
+	border: none;
+	margin-top: 100px;
+	margin-bottom: 75px;
+
+}
+
+/* well bottom link */
+.link {
+	float: right; 
+}
+
+.title {
+	padding-top: 30px;
+	padding-bottom: 50px;
 	text-align: center;
+	color: white;
 }
 
-/* Centering images in jumbo */
-.jumbotron img {
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: auto;
+.title h3 {
+	font-size: 30px;
+}
+
+h5 {
+	margin-top: 0px;
+	color: white;
+	font-size: 16px;
+	float: left;
+	display: inline;
+}
+
+/* Navbar styling */
+.navbar {
+	padding-bottom: 0px;
 	margin-bottom: 0px;
 }
 
@@ -50,9 +66,37 @@ p, div {
 
 /* Button in Nav */
 nav .btn-lg, .btn-group-lg>.btn>.nav-button {
-	margin-top: 10px;
+	margin-top: 15px;
 	display: inline;
 	float:right;
+}
+
+/* Centering text in jumbo */
+.jumbotron h2 {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+.jumbotron p {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0px;
+	color: #FFF;
+	font-weight: 500;
+}
+
+/* Centering images in jumbo */
+.jumbotron img {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+/* Jumbo button tweak */
+.jumbotron .btn {
+	margin-top: 20px;
 }
 
 @media(min-width:500px){
@@ -60,7 +104,7 @@ nav .btn-lg, .btn-group-lg>.btn>.nav-button {
 	.jumbotron img {
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 10px;
+		margin-top: 0px;
 		max-width: 500px;
 	}
 }
