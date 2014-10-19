@@ -15,7 +15,7 @@
   	margin-bottom: 0px;
   	padding-top: 0px;
 }
-
+/* (horrible) Floating footer Styling */
 .well {
 	background-color: transparent;
 	box-shadow: none;
@@ -23,21 +23,21 @@
 	border: none;
 	margin-top: 100px;
 	margin-bottom: 75px;
-
 }
 
-/* well bottom link */
+/* well bottom link float*/
 .link {
 	float: right; 
 }
 
+/* Jumbo titles white*/
 .title {
 	padding-top: 30px;
 	padding-bottom: 50px;
 	text-align: center;
 	color: white;
 }
-
+/* Jumbo titles h3*/
 .title h3 {
 	font-size: 30px;
 }
